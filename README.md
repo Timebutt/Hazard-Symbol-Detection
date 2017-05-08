@@ -4,4 +4,8 @@ This repository will contain the code required to support the paper submitted to
 
 [![Demo Video](docs/images/demo_video.png)](https://youtu.be/9yZoBDC7U_M)
 
-This video is temporary and will be completed with commentary later on.
+This video is temporary and will be completed with commentary later on, it should however already demonstrate the algorithm's functionality. As further reference, the image below (taken from the paper) explains what the different markers mean.
+
+<p align="center">
+  <img src="docs/images/GUI_description.png" />
+</p>
