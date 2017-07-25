@@ -10,5 +10,5 @@ This video is temporary and will be completed with commentary later on, it shoul
   <img src="docs/images/legend.png" />
 </p>
 
-#Training the YOLOv2 Object Detection Algorithm
+# Training the YOLOv2 Object Detection Algorithm
 I have written an article detailing the procedure how YOLOv2 can be trained to detect custom objects, it can be found [here](https://timebutt.github.io/static/how-to-train-yolov2-to-detect-custom-objects/). The sample NFPA data set as used in the paper is available. 
