@@ -34,22 +34,6 @@ print(bcolors.WARNING + "LOADING" + bcolors.ENDC + " telemetry data for " + bcol
 # Read the telemetry data
 telemetry_buffer = pd.read_csv("testvlucht" + str(flight_number) + ".csv", sep=";")
 
-# Read the KML file for heading (damn!)
-# k = kml.KML()
-# doc = open("testvlucht" + str(flight_number) + ".kml").read()
-# k.from_string(doc)
-#
-# # Access the correct items from the KML file
-# features = list(k.features())
-# features[0].features()
-# f2 = list(features[0].features())
-# f3 = list(f2[0].features())
-#
-# # Extra data from the KML file
-# heading_buffer = {}
-# for u in range(len(f3)):
-#     heading_buffer[f3[u].name] = int(re.sub("[^0-9]", "",  f3[u].description.replace("\n", "").split("Orientation")[1].split("<BR><BR>")[0]))
-
 def findClosest(myList, myNumber):
     pos = bisect_left(myList, myNumber)
     if pos == 0:
@@ -151,9 +135,6 @@ def processing():
         time_delta = 10000000
         telemetry_item = {}
 
-        # Get the timestamp_detection (no longer used)
-        #timestamp_detection = int(detection['timestamp'])
-
         # Better method: use the frame number to build up the timestamp
         timestamp_detection = int(detection['frame']) / video_fps * 1000
 
@@ -184,7 +165,6 @@ def processing():
 
             # This is correct, since detection['loc_x'] has the center of the detected object (corrected when data is uploaded to server)
             correction_angle = horizontal_fov * (float(detection['loc_x']) - 0.5) / 2
-            #correction_angle = 0
             angle = telemetry['heading'] + correction_angle
             #measured_distance = 2 * object_width * focal_length_processing / (float(detection['width']) + float(detection['height']))
             measured_distance = object_width * focal_length_processing / max([float(detection['width']), float(detection['height'])])
@@ -212,10 +192,6 @@ def processing():
             # Calculate result (simplified results)
             lat = telemetry['Drone GPS Latitude'] + (180/math.pi)*(dy/6378137)
             lon = telemetry['Drone GPS Longitude'] + (180/math.pi)*(dx/6378137)/math.cos(telemetry['Drone GPS Latitude']*math.pi/180)
-
-            #if distance_between_gps_coordinates(lat, lon, 51.011384, 3.712839) > 10:
-            #if distance_between_gps_coordinates(lat, lon, controller_latitude, controller_longitude) > 10:
-            #    continue
 
             # Calculate detection coordinates (accurate calculation)
             #delta = ground_distance / R
